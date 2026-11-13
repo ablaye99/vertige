@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maquette Krema · Brunch coffee shop Suresnes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#A51C30; --red2:#C42740; --esp:#2A1A12; --brown:#5A3320; --cream:#F4ECE1; --paper:#FBF8F3;
+  --ube:#8E5CC2; --matcha:#7FA34A; --sun:#E9892B; --pista:#B9C77A;
+  --d:'Anton',Impact,sans-serif; --s:'Instrument Serif',Georgia,serif; --b:'Inter',system-ui,sans-serif; --logo:'Fredoka',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--b);background:var(--paper);color:var(--esp);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video,canvas{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
+
+.demo{background:#111;color:#f4ece1;font-size:11px;letter-spacing:.4px;text-align:center;padding:7px 12px;font-family:ui-monospace,monospace}
+
+/* logo */
+.logo{display:inline-flex;align-items:center;gap:.18em;font-family:var(--logo);font-weight:700;letter-spacing:-.04em;line-height:1}
+.logo svg{height:.9em;width:auto}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,3vw,40px);transition:background .3s,color .3s,box-shadow .3s;color:var(--cream)}
+nav.solid{--logo-cut:#FBF8F3;background:rgba(251,248,243,.92);color:var(--esp);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+nav .logo{font-size:30px}
+nav ul{display:flex;gap:26px;list-style:none;font-size:14px;font-weight:600}
+nav ul a{opacity:.85}
+nav ul a:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:700;font-size:14px;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.red{background:var(--red);color:#fff}
+.btn.line{border:1.5px solid currentColor}
+
+/* hero */
+.hero{position:relative;min-height:calc(100svh - 30px);margin-top:-62px;padding:110px clamp(16px,4vw,56px) 60px;background:var(--esp);color:var(--cream);display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,4vw,60px);align-items:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 80% 40%,rgba(165,28,48,.35),transparent 60%),radial-gradient(700px 500px at 10% 90%,rgba(233,137,43,.12),transparent 60%);pointer-events:none}
+.hero .kicker{font-family:var(--s);font-style:italic;font-size:clamp(22px,2.4vw,34px);opacity:.9}
+.hero h1{font-family:var(--d);font-weight:400;text-transform:uppercase;font-size:clamp(64px,11vw,190px);line-height:.86;letter-spacing:-.01em;margin:10px 0 18px}
+.hero h1 span{display:block;overflow:hidden}
+.hero h1 span i{display:block;font-style:normal;transform:translateY(105%);animation:up 1s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1 span:nth-child(2) i{animation-delay:.12s;color:var(--red2)}
+.hero h1 span:nth-child(3) i{animation-delay:.24s}
+@keyframes up{to{transform:none}}
+.hero p.lead{max-width:460px;font-size:17px;line-height:1.55;opacity:.85}
+.hero .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;align-items:center}
+.rating{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:9px 14px;border-radius:999px;background:rgba(244,236,225,.1)}
+.rating b{color:#F5C34B}
+.hero-media{position:relative;justify-self:center;width:min(100%,420px)}
+.hero-video{position:relative;aspect-ratio:9/16;border-radius:28px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.5);transform:rotate(2deg)}
+.hero-video video{width:100%;height:100%;object-fit:cover}
+.polaroid{position:absolute;width:44%;background:#fff;padding:7px 7px 26px;border-radius:6px;box-shadow:0 20px 40px rgba(0,0,0,.4);will-change:transform}
+.polaroid img{aspect-ratio:1;object-fit:cover;border-radius:3px;width:100%}
+.polaroid small{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-family:var(--s);font-style:italic;font-size:15px;color:var(--esp)}
+.p1{left:-30%;top:12%;transform:rotate(-8deg)}
+.p2{right:-22%;bottom:10%;transform:rotate(7deg)}
+.scrollhint{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.6}
+
+/* marquee */
+.marquee{background:var(--red);color:var(--cream);overflow:hidden;padding:16px 0}
+.marquee div{display:flex;gap:40px;width:max-content;animation:mq 30s linear infinite;font-family:var(--d);text-transform:uppercase;font-size:clamp(26px,3.4vw,46px)}
+.marquee span::after{content:"✦";margin-left:40px;color:#F5C34B}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* manifesto */
+.manifesto{padding:clamp(80px,12vw,170px) clamp(16px,6vw,90px);background:var(--paper)}
+.manifesto p{font-family:var(--s);font-size:clamp(38px,6.2vw,96px);line-height:1.02;letter-spacing:-.01em;max-width:1200px}
+.manifesto .w{opacity:.12;transition:opacity .4s}
+.manifesto .w.on{opacity:1}
+.manifesto em{color:var(--red);font-style:italic}
+.manifesto .sig{margin-top:30px;font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:600;opacity:.6}
+
+/* section heads */
+.shead{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:0 clamp(16px,4vw,56px);margin-bottom:28px}
+.num{font-family:var(--s);font-style:italic;font-size:22px;color:var(--red)}
+h2{font-family:var(--d);font-weight:400;text-transform:uppercase;font-size:clamp(52px,8.5vw,140px);line-height:.88;letter-spacing:-.005em}
+h2 em{font-family:var(--s);font-style:italic;text-transform:none;font-weight:400;color:var(--red);letter-spacing:-.02em}
+.shead p{max-width:360px;font-size:15px;line-height:1.55;opacity:.75}
+
+/* brunch horizontal */
+.hscroll{position:relative;background:var(--cream)}
+.hscroll .pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:70px 0 30px}
+.track{display:flex;gap:clamp(16px,2vw,28px);padding:0 clamp(16px,4vw,56px);will-change:transform}
+.dish{flex:0 0 auto;width:clamp(260px,30vw,420px);position:relative}
+.dish .ph{aspect-ratio:4/5;border-radius:22px;overflow:hidden;background:#ddd}
+.dish .ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.dish:hover .ph img{transform:scale(1.14)}
+.dish .meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;gap:10px}
+.dish h3{font-family:var(--d);font-weight:400;text-transform:uppercase;font-size:clamp(24px,2.2vw,34px);line-height:1}
+.dish .pr{font-family:var(--s);font-style:italic;font-size:24px;color:var(--red)}
+.dish p{font-size:14px;line-height:1.5;opacity:.7;margin-top:6px}
+.dish.big{width:clamp(300px,40vw,560px)}
+.dish.big .ph{aspect-ratio:5/5}
+.endcard{flex:0 0 auto;width:clamp(260px,26vw,360px);border-radius:22px;background:var(--red);color:var(--cream);padding:30px;display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:4/5}
+.endcard b{font-family:var(--d);font-weight:400;font-size:clamp(40px,4vw,64px);line-height:.9;text-transform:uppercase}
+
+/* signatures */
+.sig-wrap{position:relative;transition:background .7s ease}
+.sig-grid{display:grid;grid-template-columns:1fr 1fr;padding:0 clamp(16px,4vw,56px)}
+.sig-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center}
+.sig-frame{position:relative;width:min(100%,460px);aspect-ratio:4/5;border-radius:28px;overflow:hidden;box-shadow:0 40px 70px rgba(0,0,0,.25)}
+.sig-frame{background:#ddd}
+.sig-frame>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .7s,transform 1.2s}
+.sig-frame>.on{opacity:1;transform:none}
+.sig-steps .step{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 clamp(0px,3vw,40px)}
+.step .tag{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.75}
+.step h3{font-family:var(--d);font-weight:400;text-transform:uppercase;font-size:clamp(56px,7.5vw,124px);line-height:.88;margin:10px 0 16px}
+.step p{font-size:17px;line-height:1.55;max-width:420px;opacity:.85}
+.step .pr{font-family:var(--s);font-style:italic;font-size:38px;margin-top:16px}
+.sig-intro{padding:clamp(80px,10vw,140px) 0 0}
+
+/* brownie scrub */
+.scrub{position:relative;height:320vh;background:var(--esp);color:var(--cream)}
+.scrub .pin{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(16px,4vw,60px);padding:0 clamp(16px,4vw,56px);overflow:hidden}
+.scrub canvas{height:min(78vh,720px);width:auto;aspect-ratio:432/540;border-radius:26px;box-shadow:0 40px 90px rgba(0,0,0,.6);background:#3a2418 url(media/brownie_poster.jpg) center/cover}
+.scrub .left h2{color:var(--cream)}
+.scrub .left h2 em{color:#F5C34B}
+.scrub .left p{margin-top:18px;max-width:340px;opacity:.75;line-height:1.55}
+.layers{list-style:none;display:flex;flex-direction:column;gap:20px}
+.layers li{display:flex;gap:16px;align-items:baseline;opacity:.25;transition:opacity .4s,transform .4s}
+.layers li.on{opacity:1;transform:translateX(6px)}
+.layers li b{font-family:var(--s);font-style:italic;font-size:22px;color:#F5C34B;width:34px}
+.layers li span{font-family:var(--d);text-transform:uppercase;font-size:clamp(26px,2.8vw,42px);line-height:1}
+.bar{position:absolute;left:clamp(16px,4vw,56px);right:clamp(16px,4vw,56px);bottom:26px;height:2px;background:rgba(244,236,225,.15)}
+.bar i{display:block;height:100%;background:#F5C34B;width:0}
+
+/* carte */
+.carte{background:#F2D9DD;padding:clamp(80px,10vw,140px) 0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;padding:0 clamp(16px,4vw,56px);margin-bottom:34px}
+.tabs button{padding:10px 16px;border-radius:999px;border:1.5px solid var(--esp);font-weight:600;font-size:14px}
+.tabs button.on{background:var(--esp);color:var(--cream)}
+.menu{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(30px,5vw,80px);padding:0 clamp(16px,4vw,56px)}
+.mi{padding:18px 0;border-bottom:1px solid rgba(42,26,18,.18);animation:fade .5s both}
+.mi .t{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.mi h4{font-family:var(--d);font-weight:400;text-transform:uppercase;font-size:clamp(22px,2vw,28px);letter-spacing:.01em}
+.mi .p{font-family:var(--s);font-style:italic;font-size:24px;color:var(--red);white-space:nowrap}
+.mi p{font-size:14px;line-height:1.5;opacity:.7;margin-top:4px;max-width:520px}
+.mi .h{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--esp);color:var(--cream);padding:2px 7px;border-radius:999px;margin-left:8px;vertical-align:3px}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+
+/* avis */
+.avis{padding:clamp(80px,10vw,140px) clamp(16px,4vw,56px);background:var(--paper)}
+.score{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.score b{font-family:var(--d);font-weight:400;font-size:clamp(110px,16vw,240px);line-height:.8;color:var(--red)}
+.score span{font-size:16px;line-height:1.5;padding-bottom:10px}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:50px}
+.q{background:var(--cream);border-radius:20px;padding:26px}
+.q p{font-family:var(--s);font-size:26px;line-height:1.15}
+.q small{display:block;margin-top:14px;font-size:13px;font-weight:600;opacity:.6}
+
+/* lieu */
+.lieu{background:var(--esp);color:var(--cream);padding:clamp(80px,10vw,140px) clamp(16px,4vw,56px)}
+.lieu h2{color:var(--cream)}
+.lieu-grid{display:grid;grid-template-columns:1.1fr .9fr .9fr;gap:18px;margin-top:40px;align-items:stretch}
+.lieu-grid .c{border-radius:22px;overflow:hidden;position:relative;min-height:300px}
+.lieu-grid .c video,.lieu-grid .c img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.lieu-grid .c.tall{grid-row:span 2}
+.lieu-grid .info{background:var(--red);padding:30px;display:flex;flex-direction:column;justify-content:space-between;gap:20px;border-radius:22px}
+.info h5{font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:.75;margin-bottom:6px}
+.info p{font-size:18px;line-height:1.45}
+.info .todo{display:inline-block;font-size:11px;background:rgba(0,0,0,.25);padding:3px 8px;border-radius:6px;margin-top:4px}
+
+footer{background:var(--red);color:var(--cream);padding:40px clamp(16px,4vw,56px) 30px;overflow:hidden}
+footer .big{font-size:clamp(120px,26vw,420px);display:flex;justify-content:center}
+footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:13px;margin-top:20px;opacity:.85}
+
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  nav ul{display:none}
+  nav .logo{font-size:26px}
+  .hero{grid-template-columns:1fr;min-height:auto;padding:90px 18px 50px;gap:34px}
+  .hero-media{width:min(78%,340px)}
+  .p1{left:-22%} .p2{right:-18%}
+  .hero h1{font-size:clamp(64px,19vw,120px)}
+  .shead{flex-direction:column;align-items:flex-start}
+  .hscroll{height:auto!important}
+  .hscroll .pin{position:relative;height:auto;padding:70px 0 50px}
+  .track{overflow-x:auto;scroll-snap-type:x mandatory;transform:none!important;scrollbar-width:none;padding-bottom:6px}
+  .track::-webkit-scrollbar{display:none}
+  .dish,.dish.big,.endcard{width:78vw;scroll-snap-align:center}
+  .sig-grid{grid-template-columns:minmax(0,1fr)}
+  .sig-steps .step{padding:0}
+  .sig-sticky{height:58vh;top:0;z-index:1;padding-top:64px}
+  .sig-frame{width:auto;height:100%;max-width:90%}
+  .sig-steps .step{min-height:85vh;position:relative;z-index:2;justify-content:flex-end;padding-bottom:30px}
+  .sc{background:rgba(251,248,243,.94);border-radius:20px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+  .sig-sticky{height:52vh}
+  .step h3{font-size:clamp(46px,14vw,80px)}
+  .scrub .pin{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;padding:70px 18px 50px;gap:14px;justify-items:center}
+  .scrub canvas{height:min(52vh,460px)}
+  .scrub .left{text-align:center}
+  .scrub .left p{display:none}
+  .scrub .left h2{font-size:clamp(40px,12vw,64px)}
+  .layers{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:8px 14px}
+  .layers li span{font-size:18px}
+  .layers li b{font-size:15px;width:auto}
+  .menu{grid-template-columns:1fr}
+  .lieu-grid{grid-template-columns:1fr 1fr}
+  .lieu-grid .info{grid-column:span 2}
+  .lieu-grid .c.tall{grid-row:auto;grid-column:span 2;min-height:420px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero h1 span i{transform:none}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="demo">Maquette de refonte proposée par Vertige Studio · ce n'est pas le site officiel de Krema</div>
+
+<nav id="nav">
+  <a href="#top" class="logo" aria-label="Krema"><svg viewBox="0 0 40 52" aria-hidden="true"><path d="M20 2C8 2 2 14 2 27s6 23 18 23 18-10 18-23S32 2 20 2Z" fill="currentColor"/><path d="M27 8c-7 6-6 14-9 22s-4 13-8 16" stroke="var(--logo-cut,#2A1A12)" stroke-width="4.5" fill="none" stroke-linecap="round"/></svg>krema</a>
+  <ul><li><a href="#brunch">Brunch</a></li><li><a href="#signatures">Signatures</a></li><li><a href="#carte">La carte</a></li><li><a href="#lieu">Le lieu</a></li></ul>
+  <a class="btn red" href="https://www.google.com/maps/search/?api=1&query=Krema+29+Rue+de+Verdun+92150+Suresnes" target="_blank" rel="noopener">Venir chez Krema</a>
+</nav>
+
+<header class="hero" id="top">
+  <div>
+    <div class="kicker">Good morning, Suresnes.</div>
+    <h1><span><i>Brunch</i></span><span><i>all day,</i></span><span><i>café de spé.</i></span></h1>
+    <p class="lead">Krema, brunch coffee shop au 29 rue de Verdun. Tornado eggs, French toast pistache, latte qui coule doucement et matcha framboise. Un café, un coin tranquille et la paix.</p>
+    <div class="row">
+      <a class="btn red" href="#carte">Voir la carte</a>
+      <a class="btn line" href="#lieu">Nous trouver</a>
+      <span class="rating"><b>★ 4,9</b> 303 avis Google</span>
+    </div>
+  </div>
+  <div class="hero-media">
+    <div class="hero-video"><video src="media/hero.mp4" autoplay muted loop playsinline preload="auto" poster="media/hero_poster.jpg"></video></div>
+    <div class="polaroid p1" data-par="-0.12"><img decoding="async" src="ph/ube.jpg" alt="Krema Raspberry Ube"><small>ube framboise</small></div>
+    <div class="polaroid p2" data-par="0.1"><img decoding="async" src="ph/ft_plate.jpg" alt="French toast pistache"><small>french toast pistache</small></div>
+  </div>
+  <div class="scrollhint">Scroll</div>
+</header>
+
+<div class="marquee"><div id="mq"></div></div>
+
+<section class="manifesto">
+  <p id="mani">Un café, un coin tranquille et la paix. Rien de plus, rien de moins. <em>Simple. Frais. Délicieux.</em></p>
+  <div class="sig">Krema · brunch coffee shop · Suresnes</div>
+</section>
+
+<section class="hscroll" id="brunch">
+  <div class="pin">
+    <div class="shead">
+      <div><div class="num">01 · le brunch</div><h2>Brunch <em>goals</em></h2></div>
+      <p>Servi toute la journée. Œufs, brioche, avocat, poulet croustillant halal, et tout ce qu'il faut pour rester un peu plus longtemps.</p>
+    </div>
+    <div class="track" id="track">
+      <article class="dish big"><div class="ph"><img decoding="async" src="ph/brunch_table.jpg" alt="Table de brunch Krema"></div><div class="meta"><h3>La table du dimanche</h3></div><p>Crunchy tornado eggs, avocado toast et deux signatures glacées.</p></article>
+      <article class="dish"><div class="ph"><img decoding="async" src="ph/brunch_table2.jpg" alt="Crunchy tornado eggs"></div><div class="meta"><h3>Crunchy tornado eggs</h3><span class="pr">17 €</span></div><p>Poulet croustillant halal, sauce piquante, œufs brouillés en spirale, avocat.</p></article>
+      <article class="dish"><div class="ph"><img decoding="async" src="ph/avo_toast.jpg" alt="Avocado toast"></div><div class="meta"><h3>Avocado toast</h3><span class="pr">12 €</span></div><p>Brioche toastée sur sa poivronade, avocat assaisonné, garnitures fraîches.</p></article>
+      <article class="dish"><div class="ph"><img decoding="async" src="ph/ft_plate.jpg" alt="French toast pistache"></div><div class="meta"><h3>French toast pistache</h3><span class="pr">14 €</span></div><p>Crème pistache et fraises. Un pur moment de plaisir.</p></article>
+      <article class="dish"><div class="ph"><img decoding="async" src="ph/ft_bite.jpg" alt="Bouchée de French toast"></div><div class="meta"><h3>La bouchée</h3></div><p>Celle qu'on ne partage pas.</p></article>
+      <div class="endcard"><b>Toute<br>la carte<br>brunch</b><a class="btn" style="background:var(--cream);color:var(--esp);align-self:flex-start" href="#carte">Voir les 15 plats</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sig-wrap" id="signatures">
+  <div class="shead sig-intro reveal">
+    <div><div class="num">02 · les signatures</div><h2>Tu choisis <em>quoi ?</em></h2></div>
+    <p>Les boissons qu'on vient chercher exprès. Matcha, ube, rose, pistache : c'est ici que Krema se démarque.</p>
+  </div>
+  <div class="sig-grid">
+    <div class="sig-sticky"><div class="sig-frame" id="sigFrame">
+      <img decoding="async" class="on" src="ph/ube.jpg" alt="Krema Raspberry Ube">
+      <img decoding="async" src="ph/matcha_ube.jpg" alt="Matcha et ube framboise">
+      <img decoding="async" src="ph/latte_hands.jpg" alt="Pistachio latte">
+      <video src="media/rosesunset.mp4" muted loop playsinline preload="auto" poster="media/rosesunset_poster.jpg"></video>
+      <video src="media/latteart.mp4" muted loop playsinline preload="auto" poster="media/latteart_poster.jpg"></video>
+    </div></div>
+    <div class="sig-steps">
+      <div class="step" data-bg="#E7D8F1" data-i="0"><div class="sc"><div class="tag">Signature · servi froid</div><h3>Krema Raspberry Ube</h3><p>Ube crémeux sur lit de purée framboise. Violet, doux, et beaucoup trop photogénique.</p><div class="pr">6,50 €</div></div></div>
+      <div class="step" data-bg="#DDE8C8" data-i="1"><div class="sc"><div class="tag">Signature · servi froid</div><h3>Raspberry matcha</h3><p>Matcha crémeux servi froid, avec purée framboise au fond du verre. L'éternel duel avec l'ube.</p><div class="pr">6,50 €</div></div></div>
+      <div class="step" data-bg="#E9E3C9" data-i="2"><div class="sc"><div class="tag">Le plus demandé</div><h3>Pistachio latte</h3><p>Shot de café, lait à la pistache et sirop pistache. "10 sur 10, à tester en urgence", selon les avis.</p><div class="pr">7,00 €</div></div></div>
+      <div class="step" data-bg="#F6D9BF" data-i="3"><div class="sc"><div class="tag">Summer edition</div><h3>Rose Sunset</h3><p>Un shot de café, sirop de rose et jus d'orange. T'as jamais goûté ça, et tu vas adorer.</p><div class="pr">6,00 €</div></div></div>
+      <div class="step" data-bg="#EADBCB" data-i="4"><div class="sc"><div class="tag">La maison</div><h3>Krema Latte</h3><p>Café latte onctueux aux notes de crème brûlée, légèrement caramélisé. La signature qui porte le nom.</p><div class="pr">6,00 €</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="scrub" id="scrub">
+  <div class="pin">
+    <div class="left"><div class="num" style="color:#F5C34B">03 · le dessert</div><h2>Monté <em>sous</em> tes yeux</h2><p>Le brownie au caramel salé, couche par couche. Fais défiler pour le construire.</p></div>
+    <canvas id="cv" width="432" height="540" aria-label="Brownie au caramel salé monté étape par étape"></canvas>
+    <ol class="layers" id="layers">
+      <li><b>01</b><span>Brownie</span></li>
+      <li><b>02</b><span>Caramel beurre salé</span></li>
+      <li><b>03</b><span>Chocolat cristallisé</span></li>
+      <li><b>04</b><span>Glace vanille</span></li>
+    </ol>
+    <div class="bar"><i id="barI"></i></div>
+  </div>
+</section>
+
+<section class="carte" id="carte">
+  <div class="shead reveal">
+    <div><div class="num">04 · la carte</div><h2>Tout, <em>sans</em> scanner</h2></div>
+    <p>La carte complète, lisible sur ordi comme sur téléphone. Viandes halal.</p>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div class="menu" id="menu"></div>
+</section>
+
+<section class="avis">
+  <div class="score reveal"><b>4,9</b><span>sur Google<br>303 avis</span></div>
+  <div class="quotes">
+    <div class="q reveal"><p>"J'adore leur pistachio latte, 10/10, à tester en urgence si vous êtes dans le coin."</p><small>Merzak O.</small></div>
+    <div class="q reveal"><p>"Très bonne adresse pour bruncher, le cadre est sympa, ça vaut vraiment le détour."</p><small>Romayssa A.</small></div>
+    <div class="q reveal"><p>"Super brunch qui accueille aussi nos compagnons à 4 pattes !"</p><small>Avis Google</small></div>
+    <div class="q reveal"><p>"Bon brunch familial avec une bonne ambiance !"</p><small>Rime</small></div>
+  </div>
+</section>
+
+<section class="lieu" id="lieu">
+  <div class="shead" style="padding:0">
+    <div><div class="num" style="color:#F5C34B">05 · le lieu</div><h2>Viens <em>tôt,</em><br>reste tard</h2></div>
+    <p>Murs en brique blanche, fauteuils bouclette, terrasse sur la rue de Verdun. Les chiens sont les bienvenus.</p>
+  </div>
+  <div class="lieu-grid">
+    <div class="c tall reveal"><video src="media/terrasse.mp4" autoplay muted loop playsinline preload="auto" poster="media/terrasse_poster.jpg"></video></div>
+    <div class="c reveal"><img decoding="async" src="media/facade.jpg" alt="Devanture Krema"></div>
+    <div class="c reveal"><img decoding="async" src="media/interieur.jpg" alt="Intérieur Krema"></div>
+    <div class="info reveal">
+      <div><h5>Adresse</h5><p>29 rue de Verdun<br>92150 Suresnes</p></div>
+      <div><h5>Horaires</h5><p>Brunch all day<br><span class="todo">horaires exacts à compléter avec Krema</span></p></div>
+      <div><h5>Suivre</h5><p><a href="https://www.instagram.com/kremacafe.paris/" target="_blank" rel="noopener">@kremacafe.paris</a></p></div>
+      <a class="btn" style="background:var(--cream);color:var(--esp);align-self:flex-start" href="https://www.google.com/maps/search/?api=1&query=Krema+29+Rue+de+Verdun+92150+Suresnes" target="_blank" rel="noopener">Itinéraire</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="big logo"><svg viewBox="0 0 40 52" aria-hidden="true" style="--logo-cut:#A51C30"><path d="M20 2C8 2 2 14 2 27s6 23 18 23 18-10 18-23S32 2 20 2Z" fill="currentColor"/><path d="M27 8c-7 6-6 14-9 22s-4 13-8 16" stroke="#A51C30" stroke-width="4.5" fill="none" stroke-linecap="round"/></svg>krema</div>
+  <div class="row"><span>Brunch coffee shop · 29 rue de Verdun, Suresnes</span><span>Photos et vidéos : @kremacafe.paris</span><span>Maquette Vertige Studio</span></div>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const mobile=()=>innerWidth<=900;
+
+/* marquee */
+const mqW=["Brunch all day","Pistachio latte","Tornado eggs","Matcha framboise","Café de spécialité","Suresnes"];
+$("#mq").innerHTML=[...mqW,...mqW,...mqW,...mqW].map(w=>`<span>${w}</span>`).join("");
+
+/* nav */
+const nav=$("#nav");
+/* manifesto words */
+const mani=$("#mani");
+mani.innerHTML=mani.innerHTML.replace(/(<em>.*?<\/em>)|([^\s<]+)/g,(m,em,w)=>em?`<span class="w">${em}</span>`:`<span class="w">${w}</span>`);
+const words=$$("#mani .w");
+
+/* brunch horizontal pin */
+const hs=$(".hscroll"), track=$("#track");
+function sizeH(){ if(mobile()){hs.style.height="auto";return;} const extra=track.scrollWidth-innerWidth; hs.style.height=(innerHeight+Math.max(0,extra))+"px"; }
+
+/* signatures */
+const frames=[...$("#sigFrame").children], steps=$$(".step"), sw=$(".sig-wrap");
+let curSig=-1;
+function setSig(i){ if(i===curSig) return; curSig=i; frames.forEach((f,k)=>{f.classList.toggle("on",k===i); if(f.tagName==="VIDEO"){ if(k===i){f.currentTime=0;f.play().catch(()=>{});} else f.pause(); }}); sw.style.background=steps[i].dataset.bg; }
+
+/* brownie scrub */
+const cv=$("#cv"), ctx=cv.getContext("2d"), N=142, PER=30, FW=432, FH=540, COLS=6;
+const sheets=[0,1,2,3,4].map(i=>{const im=new Image(); im.decoding="async"; im.src=`media/brownie_${i}.jpg`; im.onload=()=>{lastF=-1; tick();}; return im;});
+let lastF=-1;
+function drawFrame(f){
+  f=clamp(Math.round(f),0,N-1); if(f===lastF) return;
+  let s=Math.floor(f/PER), k=f%PER, im=sheets[s];
+  if(!im.complete||!im.naturalWidth){ while(s>0&&!(sheets[s].complete&&sheets[s].naturalWidth)){s--;} im=sheets[s]; k=PER-1; if(!im.complete||!im.naturalWidth) return; }
+  lastF=f; ctx.drawImage(im,(k%COLS)*FW,Math.floor(k/COLS)*FH,FW,FH,0,0,FW,FH);
+}
+const lis=$$("#layers li"), cuts=[.12,.36,.56,.8];
+
+/* parallax polaroids */
+const pars=$$("[data-par]");
+
+function tick(){
+  const y=scrollY, vh=innerHeight;
+  nav.classList.toggle("solid", y>vh*.6);
+  // manifesto
+  const mr=mani.getBoundingClientRect(), mp=clamp((vh*.85-mr.top)/(mr.height+vh*.35),0,1);
+  const on=Math.floor(mp*words.length*1.05); words.forEach((w,i)=>w.classList.toggle("on",i<on));
+  // horizontal
+  if(!mobile()){ const r=hs.getBoundingClientRect(), max=track.scrollWidth-innerWidth; const p=clamp(-r.top/Math.max(1,(hs.offsetHeight-vh)),0,1); track.style.transform=`translateX(${-p*max}px)`; }
+  // signatures
+  let best=0,bd=1e9; steps.forEach((s,i)=>{const r=(mobile()?s.querySelector('.sc'):s).getBoundingClientRect(); const d=Math.abs(r.top+r.height/2-vh*(mobile()?.6:.5)); if(d<bd){bd=d;best=i;}}); setSig(best);
+  // scrub
+  const sc=$("#scrub"), sr=sc.getBoundingClientRect(); const sp=clamp(-sr.top/(sc.offsetHeight-vh),0,1);
+  drawFrame(sp*(N-1)); $("#barI").style.width=(sp*100)+"%"; lis.forEach((li,i)=>li.classList.toggle("on",sp>=cuts[i]-.0001 || (i===0&&sp>.02)));
+  // parallax
+  pars.forEach(p=>{const f=+p.dataset.par; const base=p.classList.contains("p1")?-8:7; p.style.transform=`translateY(${y*f}px) rotate(${base+y*f*.02}deg)`;});
+}
+let raf=0; addEventListener("scroll",()=>{ if(!raf) raf=requestAnimationFrame(()=>{raf=0;tick();}); },{passive:true});
+addEventListener("resize",()=>{sizeH();tick();});
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:0,rootMargin:"0px 0px -8% 0px"});
+setTimeout(()=>$$(".reveal").forEach(el=>el.classList.add("in")),4000);
+$$(".reveal").forEach(el=>io.observe(el));
+
+/* carte */
+const MENU={
+ "Brunch salé":[["Avocado toast","12","Pain brioché toasté sur sa poivronade, avocat assaisonné, garnitures fraîches."],["Œufs Bénédicte au saumon","17","Pain brioché, œufs et saumon, nappé de sauce hollandaise onctueuse."],["Œufs Bénédicte au bacon","16","Pain brioché, œufs et bacon de bœuf, sauce hollandaise.","halal"],["Grilled cheese bacon","16","Sandwich au cheddar grillé et son bacon de bœuf.","halal"],["Rouge et soleil","15","Œufs pochés, sauce tomate épicée aux poivrons, oignons et épices. Tchaktchouka revisitée."],["Tornado eggs","13","Œufs brouillés en spirale, pain toasté et avocat."],["Crunchy tornado eggs","17","Poulet croustillant et sauce piquante, tornado eggs et avocat.","halal"],["Salmon tornado eggs","16.50","Tornado eggs, saumon, pain toasté et avocat."],["Turkish eggs","14","Œufs pochés sur yaourt à l'ail, huile infusée au piment, herbes et paprika."],["Salade César Océane","18","Romaine, saumon fumé, avocat, œufs de saumon, jeunes pousses, sésame, sauce César."],["Salade César au poulet","17","Romaine, poulet pané croustillant, tomates cerises, croûtons, parmesan, sauce César."]],
+ "Brunch sucré":[["Granola bowl","12","Granola croustillant, yaourt et fruits frais de saison."],["Pancakes","13","Crème vanille, sirop d'érable et fruits rouges."],["French toast","14","Crème pistache et fraises."],["Brownie au caramel salé","7","Caramel beurre salé, chocolat cristallisé, glace vanille."]],
+ "Extras":[["Bacon de bœuf","3.50","","halal"],["Saumon","4.50"],["Halloumis grillés","3"],["Tranche d'avocat","2"],["Œuf poché","2"],["Œuf au plat","2"],["Œufs brouillés","3"],["Toast grillé","2"]],
+ "Cafés":[["Espresso","2.50","Court, intense, fine crema dorée."],["Double espresso","3"],["Cappuccino","4","Espresso, lait chaud et mousse onctueuse."],["Cortado","3.50"],["Flat white","4.50","Double espresso, micro-mousse soyeuse."],["Latte","4.50"],["Americano","3.50"],["Moka","5","Espresso, chocolat et lait chaud."],["Hot chocolate","4.50"],["Chai latte","5"],["Dirty chai","5.50","Chai épicé et un shot de café."]],
+ "Signatures":[["Pistachio latte","7","Shot de café, lait à la pistache, sirop pistache."],["Krema Latte","6","Notes de crème brûlée, légèrement caramélisé."],["Krema pistache","7"],["Krema Raspberry Ube","6.50","Ube crémeux servi froid, purée framboise."],["Krema Raspberry matcha","6.50","Matcha crémeux servi froid, purée framboise."],["Krema matcha","5"],["Rose matcha","5.50","Matcha délicat parfumé au sirop de rose."],["Matcha latte","5"],["Rose cardamom latte","5","Cardamome, shot d'espresso et sirop de rose."],["Spanish latte","5","Doux et crémeux, au lait concentré sucré."],["Rose Sunset","6","Summer edition : café, sirop rose, jus d'orange."]],
+ "Thés & limonades":[["Thé noir ou vert","3"],["Citronnade maison","6","Citron frais et menthe."],["Citronnade fruit de la passion","6.50"],["Jus d'orange","4.50"],["Eau plate","2"]],
+ "Cookies & cakes":[["Cookie chocolat","3.90"],["Cookie pistache","3.90"],["Nutskie cookie","3.90"],["Cookie beurre de cacahuète","3.90"],["Cookie chocolat fleur de sel","3.90"],["Banana bread","4.90"],["Lemon cake","4.90"],["Carrot cake","4.90"],["Brownie","4.90"]],
+};
+const fmt=p=>(+p).toFixed(2).replace(".",",")+" €";
+const cats=Object.keys(MENU); let cur=cats[0];
+function renderMenu(){
+  $("#tabs").innerHTML=cats.map(c=>`<button class="${c===cur?"on":""}" data-c="${c}">${c}</button>`).join("");
+  $("#menu").innerHTML=MENU[cur].map(([n,p,d,h],i)=>`<div class="mi" style="animation-delay:${i*35}ms"><div class="t"><h4>${n}${h?`<span class="h">${h}</span>`:""}</h4><span class="p">${fmt(p)}</span></div>${d?`<p>${d}</p>`:""}</div>`).join("");
+}
+$("#tabs").addEventListener("click",e=>{const b=e.target.closest("button"); if(b){cur=b.dataset.c; renderMenu();}});
+renderMenu();
+
+/* start */
+sizeH(); setSig(0); tick();
+addEventListener("load",()=>{sizeH();tick();});
+</script>
+</body>
+</html>
